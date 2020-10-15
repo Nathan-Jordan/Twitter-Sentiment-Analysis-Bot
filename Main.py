@@ -1,4 +1,3 @@
-# Install Tweepy
 #Saman
 #Nathan
 #Daniel
@@ -6,27 +5,36 @@
 #Georgios
 #Abraham
 #Dume
+
+#Install Tweepy
 !pip install tweepy
 #Installation of graph interface
 !pip install matplotlib
 
+
 import re
 import tweepy
+
 #importing the graph interface
 import matplotlib.pyplot as plt
+
 from tweepy import OAuthHandler
 from datetime import datetime
 from pytz import timezone
 
+
+
+#Key inputs from Twitter
 consumer_api_key = 'WnOse4KW0dwPNcrYtymJ11jMQ'
 consumer_api_secret = 's9DhKqHASJISJETy462fupugBRMRDoTzRxvUfLJCU4N5fe3Jfl' 
 access_token = '1315961217740091392-ZXiF60BdxeQ8irqRAItWyZ567b0HDQ'
 access_token_secret ='wL2NRBt7sl3ldb8eVHjjxGEZgY2jgqslZOPROcQiG3U0L'
 
+#Create authorizer file
 authorizer = OAuthHandler(consumer_api_key, consumer_api_secret)
 authorizer.set_access_token(access_token, access_token_secret)
 
-
+#Get recent tweet and find tweets with search terms
 api = tweepy.API(authorizer ,timeout=15)
 all_tweets = []
 SearchValue = ""
@@ -46,6 +54,8 @@ for ix in SearchValue:
 
 print(all_tweets)
 
+
+#imports and getting dataset from a sentimental analysis done by Kaggle on tweets relating to airlines in US
 import numpy as np 
 import pandas as pd 
 import re  
@@ -62,7 +72,8 @@ y = tweets.iloc[:, 1].values
 print(X)
 
 processed_tweets = []
- 
+
+#Removes formatting
 for tweet in range(0, len(X)):  
     # Remove all the special characters
     processed_tweet = re.sub(r'\W', ' ', str(X[tweet]))
@@ -84,7 +95,7 @@ for tweet in range(0, len(X)):
  
     processed_tweets.append(processed_tweet)
 
-
+#Sentimental analysis
 from sklearn.feature_extraction.text import TfidfVectorizer  
 tfidfconverter = TfidfVectorizer(max_features=2000, min_df=5, max_df=0.7, stop_words=stopwords.words('english'))  
 X = tfidfconverter.fit_transform(processed_tweets).toarray()
@@ -97,6 +108,7 @@ PositiveCount = 0
 NeutralCount = 0
 NegativeCount = 0
 
+#Remove formating from tweets
 for tweet in all_tweets:
     # Remove all the special characters
     processed_tweet = re.sub(r'\W', ' ', tweet)
@@ -119,7 +131,7 @@ for tweet in all_tweets:
     sentiment = text_classifier.predict(tfidfconverter.transform([ processed_tweet]).toarray())
     print(processed_tweet ,":", sentiment)
 
-
+#Count of negative/positive/neutral
     if "neutral" in sentiment:
       NeutralCount += 1
     elif "negative" in sentiment:
@@ -127,16 +139,17 @@ for tweet in all_tweets:
     else:
       PositiveCount += 1
 
+#Percentage
 PosPer = PositiveCount/len(all_tweets)*100
 NegPer = NegativeCount/len(all_tweets)*100
 NeuPer = NeutralCount/len(all_tweets)*100
 
-#prints out the sentiment analysis of the tweets
+#Prints out the sentiment analysis of the tweets
 print("Negative Count:", NegativeCount, "- {:.2f}%".format(NegPer))
 print("Neutral Count:", NeutralCount, "- {:.2f}%".format(NeuPer))
 print("Positive Count: ", PositiveCount, "- {:.2f}%".format(PosPer))
 
-
+#Creating pie chart using mathplotlib
 labels = "Negative", "Positive", "Neutral"
 sections = [NegPer, PosPer, NeuPer]
 colors = ["r", "g", "y"]
@@ -148,10 +161,10 @@ plt.pie(sections, labels=labels, colors=colors,
 
 #creates the pi chart
 plt.title("Type of Tweets")
-plt.savefig("graph.png")
+plt.savefig("graph.png")  #Saves so it can be tweeted later
 plt.show()
 
-#finds the exact date and time for the tweet
+#Finds the exact date and time for the tweet
 fmt = "%Y-%m-%d %H:%M:%S %Z%z"
 now_utc = datetime.now(timezone('UTC'))
 
