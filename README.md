@@ -8,6 +8,9 @@ Takes 200 recent tweets for each search term (terms can be seperated by tweeting
 
 Does a sentiment analysis and then tweets with an @handle of the original tweeter with the result as positive/negative/neutral and a graph.
 
+
+
+
 Created using google Colab.
 
 University of Essex created the sentimental analysis part.
