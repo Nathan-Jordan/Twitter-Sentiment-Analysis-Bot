@@ -12,3 +12,5 @@ Does a sentiment analysis and then tweets with an @handle of the original tweete
 Created using google Colab.
 
 University of Essex created the sentimental analysis part.
+
+https://colab.research.google.com/drive/1B1_jQrBTqlVm-ftBGIWQKApbju8iIw2F?usp=sharing#scrollTo=MBSMP6OHbDo9
