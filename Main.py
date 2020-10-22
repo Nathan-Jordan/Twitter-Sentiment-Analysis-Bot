@@ -24,11 +24,11 @@ from pytz import timezone
 
 
 
-#Key inputs from Twitter
-consumer_api_key = 'WnOse4KW0dwPNcrYtymJ11jMQ'
-consumer_api_secret = 's9DhKqHASJISJETy462fupugBRMRDoTzRxvUfLJCU4N5fe3Jfl' 
-access_token = '1315961217740091392-ZXiF60BdxeQ8irqRAItWyZ567b0HDQ'
-access_token_secret ='wL2NRBt7sl3ldb8eVHjjxGEZgY2jgqslZOPROcQiG3U0L'
+#Key inputs from Twitter - Enter your Twitter keys
+consumer_api_key = ''
+consumer_api_secret = '' 
+access_token = ''
+access_token_secret =''
 
 #Create authorizer file
 authorizer = OAuthHandler(consumer_api_key, consumer_api_secret)
